@@ -8,7 +8,7 @@ export const movieListReducer = (
     case "FETCH_MOVIE_LIST":
       return {
         ...state,
-        movieList: { ...state.movieList, ..._.mapKeys(action.payload, "id") },
+        movieList: { ..._.mapKeys(action.payload, "id") },
       };
     case "FETCH_MOVIE_DETAILS":
       console.log(" action.payload===", action.payload);
@@ -19,8 +19,7 @@ export const movieListReducer = (
     case "SEARCH_MOVIE":
       return {
         ...state,
-        searchedMovie: {
-          ...state.searchedMovie,
+        movieList: {
           ..._.mapKeys(action.payload, "id"),
         },
       };

@@ -9,8 +9,11 @@ import { connect, useDispatch } from "react-redux";
 
 const SearchBar = () => {
   let dispatch = useDispatch();
-  const handleChange = (term) => {
-    if (term.trim().length > 0) dispatch(search_movie(term));
+  const handleChange = (e, term) => {
+    console.log("e", e);
+    if (e.key === "Enter") {
+      if (term.trim().length > 0) dispatch(search_movie(term));
+    }
   };
   return (
     <div className="search-container">
@@ -18,7 +21,7 @@ const SearchBar = () => {
         style={{ width: "100%" }}
         id="outlined-textarea"
         variant="standard"
-        onClick={(e) => handleChange(e.target.value)}
+        onKeyUp={(e) => handleChange(e, e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

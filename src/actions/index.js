@@ -18,10 +18,12 @@ export const get_movie_details = (id) => async (dispatch) => {
   let response = await axios.get(
     `/3/movie/${id}?api_key=${process.env.REACT_APP_KEY}`
   );
+
   dispatch({
     type: "FETCH_MOVIE_DETAILS",
     payload: response.data,
   });
+
   console.log("response_movie", response);
 };
 
@@ -31,8 +33,21 @@ export const search_movie = (term) => async (dispatch) => {
       process.env.REACT_APP_KEY
     }`
   );
-  dispatch({
-    type: "SEARCH_MOVIE",
-    payload: response.data.results,
-  });
+  if (response.data.results.length !== 0) {
+    dispatch({
+      type: "SEARCH_MOVIE",
+      payload: response.data.results,
+    });
+  } else {
+    let response = await axios.get(
+      "/3/movie/upcoming?language=en-US&page=1&sort_by=popularity.desc" +
+        "&api_key=" +
+        process.env.REACT_APP_KEY
+    );
+    dispatch({
+      type: "FETCH_MOVIE_LIST",
+      payload: response.data.results,
+    });
+    console.log("response", response);
+  }
 };
