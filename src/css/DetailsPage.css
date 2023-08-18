@@ -1,0 +1,10 @@
+.details-page {
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+}
+
+.details-page .image {
+  width: 250px;
+  height: 300px;
+}
