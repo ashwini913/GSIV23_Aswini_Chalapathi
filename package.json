@@ -1,7 +1,7 @@
 {
   "name": "movie_app",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://ashwini913.github.io",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
