@@ -8,6 +8,24 @@
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 1450px) {
+  .list-container {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .list-container {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .list-container {
+    grid-template-columns: auto auto;
+  }
+}
+
 .movie-card {
   width: 260px;
   height: 400px;
@@ -35,4 +53,14 @@
   justify-content: space-between;
   gap: 15px;
   font-size: 14px;
+}
+
+.not-found {
+  display: flex;
+  margin-top: 200px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 400;
+  color: #4285f4;
 }

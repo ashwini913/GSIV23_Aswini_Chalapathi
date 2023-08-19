@@ -28,12 +28,13 @@ export const get_movie_details = (id) => async (dispatch) => {
 };
 
 export const search_movie = (term) => async (dispatch) => {
+  console.log("length", term.length);
   let response = await axios.get(
     `/3/search/movie?query=${term.toLowerCase()}&api_key=${
       process.env.REACT_APP_KEY
     }`
   );
-  if (response.data.results.length !== 0) {
+  if (term.trim().length !== 0) {
     dispatch({
       type: "SEARCH_MOVIE",
       payload: response.data.results,
