@@ -2,7 +2,7 @@
   "name": "movie_app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://ashwini913.github.io//GSIV23_Aswini_Chalapathi",
+  "homepage": "https://ashwini913.github.io/GSIV23_Aswini_Chalapathi",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
