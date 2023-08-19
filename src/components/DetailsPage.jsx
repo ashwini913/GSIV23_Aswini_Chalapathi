@@ -25,7 +25,7 @@ const DetailsPage = ({ movie }) => {
         <div>
           <span>{movie.title}</span> | <span>{movie.runtime}</span>
           <span></span>
-          <div>{movie.overview}</div>
+          <div>Description : {movie.overview}</div>
         </div>
       </div>
     )
