@@ -1,14 +1,29 @@
 import React, { useEffect } from "react";
 //import { getAllMoviesList } from "../dataService";
-import { get_movie_list } from "../actions/index";
+import { get_movie_list, search_movie } from "../actions/index";
 import { connect, useDispatch } from "react-redux";
 import "../css/HomePage.css";
 import { Link } from "react-router-dom";
+import { Pagination } from "antd";
 
-const HomePage = ({ movieList, searchTerm }) => {
+const HomePage = ({
+  movieList,
+  pageNumber,
+  totalPages,
+  latestOrSearch,
+  searchTerm,
+}) => {
   let dispatch = useDispatch();
+  const onPaginationChange = (e) => {
+    console.log("event=============", e);
+    if (latestOrSearch === "latest") {
+      dispatch(get_movie_list(e));
+    } else if (latestOrSearch === "search") {
+      dispatch(search_movie(searchTerm, e));
+    }
+  };
   useEffect(() => {
-    dispatch(get_movie_list());
+    dispatch(get_movie_list(1));
     console.log("movilist------", movieList);
   }, []);
   return (
@@ -25,7 +40,10 @@ const HomePage = ({ movieList, searchTerm }) => {
                 <img
                   alt={movie.title}
                   src={
-                    "https://image.tmdb.org/t/p/original" + movie.poster_path
+                    movie.poster_path
+                      ? "https://image.tmdb.org/t/p/original" +
+                        movie.poster_path
+                      : ""
                   }
                 ></img>
                 <div className="details-section">
@@ -51,6 +69,14 @@ const HomePage = ({ movieList, searchTerm }) => {
       {movieList.length === 0 && (
         <div className="not-found">Results are found</div>
       )}
+      <Pagination
+        onChange={(e) => onPaginationChange(e)}
+        className="pagination"
+        current={pageNumber}
+        defaultCurrent={1}
+        total={totalPages}
+        showSizeChanger={false}
+      />
     </div>
   );
 };
@@ -58,6 +84,10 @@ const HomePage = ({ movieList, searchTerm }) => {
 const mapStateToProps = (state) => {
   return {
     movieList: Object.values(state.movieList.movieList),
+    pageNumber: state.movieList.pageNumber,
+    totalPages: state.movieList.totalPages,
+    latestOrSearch: state.movieList.latestOrSearch,
+    searchTerm: state.movieList.searchTerm,
   };
 };
 export default connect(mapStateToProps, { get_movie_list })(HomePage);

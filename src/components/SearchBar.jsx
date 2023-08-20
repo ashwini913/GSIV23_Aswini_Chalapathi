@@ -12,7 +12,7 @@ const SearchBar = () => {
   const handleChange = (e, term) => {
     console.log("e", e);
     if (e.key === "Enter") {
-      dispatch(search_movie(term));
+      dispatch(search_movie(term, 1));
     }
   };
   return (
