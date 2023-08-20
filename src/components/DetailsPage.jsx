@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "../css/DetailsPage.css";
 
-const DetailsPage = ({ movie }) => {
+const DetailsPage = ({ movie, movieViewError }) => {
   let dispatch = useDispatch();
   const { id } = useParams();
 
@@ -15,26 +15,34 @@ const DetailsPage = ({ movie }) => {
   }, []);
 
   return (
-    movie && (
-      <div className="details-page">
-        <img
-          style={{ width: "250px", height: "300px" }}
-          alt={movie.title}
-          src={"https://image.tmdb.org/t/p/original" + movie.poster_path}
-        ></img>
-        <div>
-          <span>{movie.title}</span> | <span>{movie.runtime}</span>
-          <span></span>
-          <div>Description : {movie.overview}</div>
+    <>
+      {movie && (
+        <div className="details-page">
+          <img
+            style={{ width: "250px", height: "300px" }}
+            alt={movie.title}
+            src={"https://image.tmdb.org/t/p/original" + movie.poster_path}
+          ></img>
+          <div>
+            <span>{movie.title}</span> | <span>{movie.runtime}</span>
+            <span></span>
+            <div>Description : {movie.overview}</div>
+          </div>
         </div>
-      </div>
-    )
+      )}
+      {movieViewError && (
+        <div className="error">
+          {movieViewError.type} : {movieViewError.message}
+        </div>
+      )}
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     movie: state.movieList.movieView[0],
+    movieViewError: state.movieList.movieViewError,
   };
 };
 

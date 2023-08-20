@@ -12,6 +12,7 @@ const HomePage = ({
   totalPages,
   latestOrSearch,
   searchTerm,
+  movieListError,
 }) => {
   let dispatch = useDispatch();
   const onPaginationChange = (e) => {
@@ -66,17 +67,26 @@ const HomePage = ({
             </Link>
           ))}
       </div>
-      {movieList.length === 0 && (
+      {console.log("movieListError", movieListError)}
+      {movieListError && (
+        <div className="not-found">
+          {movieListError.type} : {movieListError.message}
+        </div>
+      )}
+      {movieList.length === 0 && !movieListError && (
         <div className="not-found">Results are found</div>
       )}
-      <Pagination
-        onChange={(e) => onPaginationChange(e)}
-        className="pagination"
-        current={pageNumber}
-        defaultCurrent={1}
-        total={totalPages}
-        showSizeChanger={false}
-      />
+
+      {movieList.length > 0 && (
+        <Pagination
+          onChange={(e) => onPaginationChange(e)}
+          className="pagination"
+          current={pageNumber}
+          defaultCurrent={1}
+          total={totalPages}
+          showSizeChanger={false}
+        />
+      )}
     </div>
   );
 };
@@ -88,6 +98,7 @@ const mapStateToProps = (state) => {
     totalPages: state.movieList.totalPages,
     latestOrSearch: state.movieList.latestOrSearch,
     searchTerm: state.movieList.searchTerm,
+    movieListError: state.movieList.movieListError,
   };
 };
 export default connect(mapStateToProps, { get_movie_list })(HomePage);
