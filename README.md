@@ -21,9 +21,12 @@ Consider if we have a complex model where a state of component is being used in 
 
 Using reusable component will make our code much simpler and will remove redundant code ,if there is an bug it is easy to fix , if there is any change easy to implement
 
-## search functionality implementation
+## pagination and error logging
 
-by using material UI i have implemented search which i think is very easy to implemented and very easy to customize
+Implementation of pagination and when ever clicked on next page a api call is made with that particular page number , same goes for search too.
+Search and latest movies will have there own paginations .If you search for a movie and click on next page it will show next page of that particular search and latest work the same.
+
+error logging is implemented ,if and api call is made and error occurs
 
 # If i had more time
 
@@ -34,3 +37,7 @@ I think automated testing will make sure the code which we have implemented will
 ## In redux i have made the state mutable as per requirement
 
 In redux i made state mutable because the search movie list must replace the latest movie list and again if search is cancelled it should the latest movie list ,so rather that make state immutable i made it mutable , but i would like to find a way to make it immutable and also which should be simple to implement
+
+# error logging
+
+The error logging that i have done is not that good , would like to work more on that
